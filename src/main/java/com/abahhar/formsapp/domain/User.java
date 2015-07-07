@@ -1,5 +1,7 @@
 package com.abahhar.formsapp.domain;
 
+import java.util.Set;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,13 +15,21 @@ public class User {
     private String login;
      
     private String password;
-     
+    
+    //---------------------------------Navigation properties---------------------------------//
+    
     @OneToOne(cascade=CascadeType.ALL)
     @JoinTable(name="user_roles",
         joinColumns = {@JoinColumn(name="user_id", referencedColumnName="id")},
         inverseJoinColumns = {@JoinColumn(name="role_id", referencedColumnName="id")}
     )
     private Role role;
+    
+    @OneToMany(mappedBy="user", cascade=CascadeType.REMOVE)
+    private Set<SimpleAnswer> simpleAnswers;
+
+	@OneToMany(mappedBy="user", cascade=CascadeType.REMOVE)
+    private Set<ChoiceAnswer> choiceAnswers;
  
     public Integer getId() {
         return id;
@@ -51,6 +61,22 @@ public class User {
  
     public void setRole(Role role) {
         this.role = role;
-    }   
+    }
+    
+    public Set<SimpleAnswer> getSimpleAnswers() {
+		return simpleAnswers;
+	}
+
+	public void setSimpleAnswers(Set<SimpleAnswer> simpleAnswers) {
+		this.simpleAnswers = simpleAnswers;
+	}
+
+	public Set<ChoiceAnswer> getChoiceAnswers() {
+		return choiceAnswers;
+	}
+
+	public void setChoiceAnswers(Set<ChoiceAnswer> choiceAnswers) {
+		this.choiceAnswers = choiceAnswers;
+	}
  
 }

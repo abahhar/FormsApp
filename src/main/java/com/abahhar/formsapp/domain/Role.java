@@ -13,7 +13,9 @@ public class Role {
     private Integer id;
      
     private String role;
-     
+    
+    //---------------------------------Navigation properties---------------------------------//
+    
     @OneToMany(cascade=CascadeType.ALL)
     @JoinTable(name="user_roles", 
         joinColumns = {@JoinColumn(name="role_id", referencedColumnName="id")},
