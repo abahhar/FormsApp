@@ -15,9 +15,17 @@ public class Form {
 	@Column
 	private String title;
 	
+	public Form(){
+		
+	}
+	
+	public Form(String title){
+		this.title = title;
+	}
+	
 	//---------------------------------Navigation properties---------------------------------//
 	
-	@OneToMany(mappedBy="form", cascade=CascadeType.REMOVE)
+	@OneToMany(mappedBy="form", cascade=CascadeType.REMOVE, fetch=FetchType.EAGER)
 	private Set<Question> questions;
 
 	public Integer getId() {

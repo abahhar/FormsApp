@@ -1,5 +1,6 @@
 package com.abahhar.formsapp.domain;
 
+import java.util.Iterator;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -8,12 +9,16 @@ import javax.persistence.*;
 @Table(name="mcquestions")
 public class MCQuestion extends Question {
 	
+	public MCQuestion(){
+		super();
+	}
+	
 	//---------------------------------Navigation properties---------------------------------//
 	
-	@OneToMany(mappedBy="mcQuestion", cascade=CascadeType.REMOVE)
+	@OneToMany(mappedBy="mcQuestion", cascade=CascadeType.REMOVE, fetch=FetchType.EAGER)
 	private Set<Choice> choices;
 	
-	@OneToMany(mappedBy="mcQuestion", cascade=CascadeType.REMOVE)
+	@OneToMany(mappedBy="mcQuestion", cascade=CascadeType.REMOVE, fetch=FetchType.EAGER)
 	private Set<ChoiceAnswer> choiceAnswers;
 
 	public Set<Choice> getChoices() {
@@ -21,6 +26,9 @@ public class MCQuestion extends Question {
 	}
 
 	public void setChoices(Set<Choice> choices) {
+		/*for(Iterator<Choice> c = choices.iterator(); c.hasNext(); ){
+			c.next().setMcQuestion(this);
+		}*/
 		this.choices = choices;
 	}
 	

@@ -14,6 +14,14 @@ public class Question {
 	@Column
 	private String text;
 	
+	public Question(){
+		
+	}
+	
+	public Question(String text){
+		this.text = text;
+	}
+	
 	//---------------------------------Navigation properties---------------------------------//
 	
 	@ManyToOne

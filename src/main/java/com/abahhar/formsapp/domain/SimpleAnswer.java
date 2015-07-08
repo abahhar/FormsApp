@@ -13,6 +13,14 @@ public class SimpleAnswer {
 	@Column
 	private String text;
 	
+	public SimpleAnswer(){
+		
+	}
+	
+	public SimpleAnswer(String text){
+		this.text = text;
+	}
+	
 	//---------------------------------Navigation properties---------------------------------//
 	
 	@ManyToOne

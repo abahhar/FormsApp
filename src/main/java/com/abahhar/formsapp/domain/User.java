@@ -25,10 +25,10 @@ public class User {
     )
     private Role role;
     
-    @OneToMany(mappedBy="user", cascade=CascadeType.REMOVE)
+    @OneToMany(mappedBy="user", cascade=CascadeType.REMOVE, fetch=FetchType.EAGER)
     private Set<SimpleAnswer> simpleAnswers;
 
-	@OneToMany(mappedBy="user", cascade=CascadeType.REMOVE)
+	@OneToMany(mappedBy="user", cascade=CascadeType.REMOVE, fetch=FetchType.EAGER)
     private Set<ChoiceAnswer> choiceAnswers;
  
     public Integer getId() {

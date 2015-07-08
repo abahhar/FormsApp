@@ -10,6 +10,10 @@ public class ChoiceAnswer {
 	@GeneratedValue
 	private Integer id;
 	
+	public ChoiceAnswer(){
+		
+	}
+	
 	//---------------------------------Navigation properties---------------------------------//
 	
 	@ManyToOne

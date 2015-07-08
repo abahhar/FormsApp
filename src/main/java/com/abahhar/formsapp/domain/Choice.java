@@ -15,13 +15,21 @@ public class Choice {
 	@Column
 	private String text;
 	
+	public Choice(){
+		
+	}
+	
+	public Choice(String text){
+		this.text = text;
+	}
+	
 	//---------------------------------Navigation properties---------------------------------//
 	
 	@ManyToOne
 	@JoinColumn(name="question_id")
 	private MCQuestion mcQuestion;
 	
-	@OneToMany(mappedBy="choice", cascade=CascadeType.REMOVE)
+	@OneToMany(mappedBy="choice", cascade=CascadeType.REMOVE, fetch=FetchType.EAGER)
 	private Set<ChoiceAnswer> choiceAnswers;
 
 	public Integer getId() {

@@ -11,9 +11,18 @@ public class SimpleQuestion extends Question {
 	@Column
 	private Integer numberOfAnswers;
 	
+	public SimpleQuestion(){
+		super();
+	}
+	
+	public SimpleQuestion(String text, Integer numberOfAnswers){
+		super(text);
+		this.numberOfAnswers = numberOfAnswers;
+	}
+	
 	//---------------------------------Navigation properties---------------------------------//
 	
-	@OneToMany(mappedBy="simpleQuestion", cascade=CascadeType.REMOVE)
+	@OneToMany(mappedBy="simpleQuestion", cascade=CascadeType.REMOVE, fetch=FetchType.EAGER)
 	private Set<SimpleAnswer> simpleAnswers;
 
 	public Integer getNumberOfAnswers() {
