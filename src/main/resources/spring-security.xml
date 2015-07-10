@@ -20,8 +20,16 @@
   <jpa:repositories base-package="com.abahhar.formsapp.repository"/>
   
   <!-- Spring Security Configuration -->
+  <security:http pattern="/resources/**" security="none"/> <!-- Permit access to static resources -->
+  
   <security:http auto-config='true'>
-    <security:intercept-url pattern="/**" access="ROLE_USER"/>  
+  	<security:intercept-url pattern="/user-login" access="IS_AUTHENTICATED_ANONYMOUSLY"/> <!-- To avoid redirect loop since login-page changed -->
+    <security:intercept-url pattern="/forms/**" access="ROLE_USER"/>  
+    <security:form-login login-page="/user-login"
+    default-target-url="/forms"
+    always-use-default-target="true"
+    authentication-failure-url="/error-login" />
+    <security:logout logout-success-url="/forms" />
   </security:http>
   
   <!--
