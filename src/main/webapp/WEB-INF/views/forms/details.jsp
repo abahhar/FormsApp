@@ -73,57 +73,65 @@
 		
 		<c:choose>
 			<c:when test="${not empty simpleQuestions}">
-				<table class="table table-striped" style="font-size: 18px">
-			    <thead>
-			      <tr>
-			        <th>Simple questions</th>
-			      </tr>
-			    </thead>
-			    <tbody>
-			      
-			      <c:forEach var="simpleQuestion" items="${simpleQuestions}">
-			      	<tr>
-				        <td style="padding: 10px">
-				        	<a href="<c:url value="../simpleQuestions/details?id=${simpleQuestion.id}" />" >
-				        		${simpleQuestion.text}
-				        	</a>
-				        </td>
+				<div class="well">
+					<table class="table table-striped" style="font-size: 18px">
+				    <thead>
+				      <tr>
+				        <th>Simple questions</th>
 				      </tr>
-			      </c:forEach>
-			      
-			    </tbody>
-			  </table>
+				    </thead>
+				    <tbody>
+				      
+				      <c:forEach var="simpleQuestion" items="${simpleQuestions}">
+				      	<tr>
+					        <td style="padding: 10px">
+					        	<a href="<c:url value="../simpleQuestions/details?id=${simpleQuestion.id}" />" >
+					        		${simpleQuestion.text}
+					        	</a>
+					        </td>
+					      </tr>
+				      </c:forEach>
+				      
+				    </tbody>
+				  </table>
+			  </div>
 			</c:when>
 			<c:otherwise>
-				There are no simple questions
+				<div class="well">
+					There are no written questions
+				</div>
 			</c:otherwise>
 		</c:choose>
 		
 		<c:choose>
 			<c:when test="${not empty mcQuestions}">
-				<table class="table table-striped" style="font-size: 18px">
-			    <thead>
-			      <tr>
-			        <th>Multiple choice questions</th>
-			      </tr>
-			    </thead>
-			    <tbody>
-			      
-			      <c:forEach var="mcQuestion" items="${mcQuestions}">
-			      	<tr>
-				        <td style="padding: 10px">
-				        	<a href="<c:url value="mcQuestions/details?id=${mcQuestion.id}" />" >
-				        		${mcQuestion.text}
-				        	</a>
-				        </td>
+				<div class="well">
+					<table class="table table-striped" style="font-size: 18px">
+				    <thead>
+				      <tr>
+				        <th>Multiple choice questions</th>
 				      </tr>
-			      </c:forEach>
-			      
-			    </tbody>
-			  </table>
+				    </thead>
+				    <tbody>
+				      
+				      <c:forEach var="mcQuestion" items="${mcQuestions}">
+				      	<tr>
+					        <td style="padding: 10px">
+					        	<a href="<c:url value="mcQuestions/details?id=${mcQuestion.id}" />" >
+					        		${mcQuestion.text}
+					        	</a>
+					        </td>
+					      </tr>
+				      </c:forEach>
+				      
+				    </tbody>
+				  </table>
+				</div>
 			</c:when>
 			<c:otherwise>
-				There are no multiple choice questions
+				<div class="well">
+					There are no multiple choice questions
+				</div>
 			</c:otherwise>
 		</c:choose>
 

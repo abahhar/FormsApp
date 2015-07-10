@@ -72,5 +72,30 @@ public class FormsController {
 		
 		return new ModelAndView("redirect:/forms");
 	}
+	
+	@RequestMapping(value="/forms/update", method=RequestMethod.GET)
+	public ModelAndView update(@RequestParam Integer id){
+		ModelAndView modelAndView = new ModelAndView("forms/edit");
+		modelAndView.addObject("form", formService.findOne(id));
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="/forms/update", method=RequestMethod.POST)
+	public ModelAndView update(@ModelAttribute("form") Form form){
+		ModelAndView modelAndView = new ModelAndView("redirect:/forms/details?id="+form.getId().toString());
+		
+		formService.save(form);
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="/forms/delete", method=RequestMethod.GET)
+	public ModelAndView delete(@RequestParam Integer id){
+		ModelAndView modelAndView = new ModelAndView("redirect:/forms");
+		formService.delete(id);
+		
+		return modelAndView;
+	}
 
 }

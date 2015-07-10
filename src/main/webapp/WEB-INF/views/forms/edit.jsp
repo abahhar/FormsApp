@@ -1,6 +1,7 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ page session="false" %>
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Forms App - Home</title>
+    <title>Forms App - Login</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
@@ -68,60 +69,27 @@
 
     <!-- Page Content -->
     <div class="container">
-
-        <!-- Jumbotron Header -->
-        <header class="jumbotron hero-spacer">
-            <h1>A Warm Welcome!</h1>
-            <p>Welcome to Forms App, where you can interact with people through creating and answering questions!</p>
-        </header>
-
-        <hr>
-        
-        <sec:authorize access="hasRole('ROLE_ADMIN')">
-        	<h3>
-    			<a href="<c:url value="/forms/create"/>">Create form</a>
-			</h3>
-        </sec:authorize>
-
-        <!-- Title -->
-        <div class="row">
-            <div class="col-lg-12">
-                <h3>Latest Forms</h3>
-            </div>
-        </div>
-        <!-- /.row -->
-		<c:choose>
-			<c:when test="${not empty forms }">
-			
-		        <!-- Page Features -->
-		        <div class="row text-center">
-		        
-		        	<c:forEach var="form" items="${forms}">
-		        	
-		        	<a href="<c:url value="forms/details?id=${form.id}" />">
-			            <div class="col-md-3 col-sm-6 hero-feature">
-			                <div class="thumbnail">
-			                    <img src="<c:url value="/resources/img/form-icon.png" />" alt="">
-			                    <div class="caption">
-			                        <h3>${form.title}</h3>
-			                        <p>
-			                            <a href="<c:url value="forms/update?id=${form.id}"/>" class="btn btn-primary">Edit</a> <a href="<c:url value="forms/delete?id=${form.id}"/>" class="btn btn-default">Delete</a>
-			                        </p>
-			                    </div>
-			                </div>
-			            </div>
-		            </a>
-		            
-		            </c:forEach>
-		            
-		        </div>
-		        <!-- /.row -->
-		        
-	        </c:when>
-	        <c:otherwise>
-	        	There are no forms
-	        </c:otherwise>
-        </c:choose>
+    	<h2 class="text-center">Edit form: ${form.title}</h2>
+    	<p>
+		
+        <form class="form-horizontal" role="form" name="form" method="POST" action="<c:url value="/forms/update"/>" >
+		  <div class="form-group">
+		    <label class="control-label col-sm-2" for="title">title:</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" name="title" id="title" value="${form.title}" autofocus>
+		    </div>
+		  </div>
+		  <input type="hidden" name="id" value="${form.id}" />
+		  <div class="form-group"> 
+		    <div class="col-sm-offset-2 col-sm-10">
+		      <button type="submit" class="btn btn-default">Update</button>
+		    </div>
+		  </div>
+		</form>
+		
+		<h4>
+    			<a href="<c:url value="/forms"/>">Back</a>
+		</h4>
 
         <hr>
 
