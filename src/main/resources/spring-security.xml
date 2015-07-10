@@ -22,9 +22,9 @@
   <!-- Spring Security Configuration -->
   <security:http pattern="/resources/**" security="none"/> <!-- Permit access to static resources -->
   
-  <security:http auto-config='true'>
-  	<security:intercept-url pattern="/user-login" access="IS_AUTHENTICATED_ANONYMOUSLY"/> <!-- To avoid redirect loop since login-page changed -->
-    <security:intercept-url pattern="/forms/**" access="ROLE_USER"/>  
+  <security:http auto-config='true' use-expressions="true"> <!-- use-expressions enables using expressions like isAuthorized(), isAnonymous() & isRole() -->
+  	<security:intercept-url pattern="/user-login" access="isAnonymous()"/> <!-- To avoid redirect loop since login-page changed -->
+    <security:intercept-url pattern="/forms/**" access="hasRole('ROLE_USER')"/>  
     <security:form-login login-page="/user-login"
     default-target-url="/forms"
     always-use-default-target="true"

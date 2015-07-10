@@ -46,7 +46,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Forms App</a>
+                <a class="navbar-brand" href="<c:url value="/" />">Forms App</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -76,11 +76,11 @@
 		</c:if>
 		</p>
 		
-        <form class="form-horizontal" role="form" method="POST" action="<c:url value='${pageContext.request.contextPath}/j_spring_security_check'/>" >
+        <form class="form-horizontal" role="form" method="POST" action="<c:url value="/j_spring_security_check"/>" >
 		  <div class="form-group">
 		    <label class="control-label col-sm-2" for="j_username">Username:</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control" name="j_username" id="j_username" placeholder="Enter username">
+		      <input type="text" class="form-control" name="j_username" id="j_username" placeholder="Enter username" autofocus>
 		    </div>
 		  </div>
 		  <div class="form-group">
@@ -102,7 +102,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+                    <p>Copyright &copy; Forms App 2015</p>
                 </div>
             </div>
         </footer>

@@ -49,10 +49,10 @@ public class FormTest {
 		int id = formToUpdate.getId();
 		Form form = formService.findOne(id);
 		
-		Set<Question> questions = form.getQuestions();
+		/*Set<Question> questions = form.getQuestions();
 		for(Iterator<Question> it = questions.iterator(); it.hasNext() ; ){
 			System.out.println(it.next().getText());
-		}
+		}*/
 		
 		Assert.assertNotNull(form);
 		Assert.assertEquals(newTitle, form.getTitle());

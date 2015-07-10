@@ -1,6 +1,7 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ page session="false" %>
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Forms App - Home</title>
+    <title>Forms App - Login</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
@@ -68,57 +69,63 @@
 
     <!-- Page Content -->
     <div class="container">
-
-        <!-- Jumbotron Header -->
-        <header class="jumbotron hero-spacer">
-            <h1>A Warm Welcome!</h1>
-            <p>Welcome to Forms App, where you can interact with people through creating and answering questions!</p>
-        </header>
-
-        <hr>
-        
-        <sec:authorize access="hasRole('ROLE_ADMIN')">
-        	<h3>
-    			<a href="<c:url value="/forms/create"/>">Create form</a>
-			</h3>
-        </sec:authorize>
-
-        <!-- Title -->
-        <div class="row">
-            <div class="col-lg-12">
-                <h3>Latest Forms</h3>
-            </div>
-        </div>
-        <!-- /.row -->
+    	<h2 class="text-center">${form.title}</h2>
+		
 		<c:choose>
-			<c:when test="${not empty forms }">
-			
-		        <!-- Page Features -->
-		        <div class="row text-center">
-		        
-		        	<c:forEach var="form" items="${forms}">
-		        	
-		        	<a href="<c:url value="forms/details?id=${form.id}" />">
-			            <div class="col-md-3 col-sm-6 hero-feature">
-			                <div class="thumbnail">
-			                    <img src="<c:url value="/resources/img/form-icon.png" />" alt="">
-			                    <div class="caption">
-			                        <h3>${form.title}</h3>
-			                    </div>
-			                </div>
-			            </div>
-		            </a>
-		            
-		            </c:forEach>
-		            
-		        </div>
-		        <!-- /.row -->
-		        
-	        </c:when>
-	        <c:otherwise>
-	        	There are no forms
-	        </c:otherwise>
-        </c:choose>
+			<c:when test="${not empty simpleQuestions}">
+				<table class="table table-striped" style="font-size: 18px">
+			    <thead>
+			      <tr>
+			        <th>Simple questions</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      
+			      <c:forEach var="simpleQuestion" items="${simpleQuestions}">
+			      	<tr>
+				        <td style="padding: 10px">
+				        	<a href="<c:url value="../simpleQuestions/details?id=${simpleQuestion.id}" />" >
+				        		${simpleQuestion.text}
+				        	</a>
+				        </td>
+				      </tr>
+			      </c:forEach>
+			      
+			    </tbody>
+			  </table>
+			</c:when>
+			<c:otherwise>
+				There are no simple questions
+			</c:otherwise>
+		</c:choose>
+		
+		<c:choose>
+			<c:when test="${not empty mcQuestions}">
+				<table class="table table-striped" style="font-size: 18px">
+			    <thead>
+			      <tr>
+			        <th>Multiple choice questions</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      
+			      <c:forEach var="mcQuestion" items="${mcQuestions}">
+			      	<tr>
+				        <td style="padding: 10px">
+				        	<a href="<c:url value="mcQuestions/details?id=${mcQuestion.id}" />" >
+				        		${mcQuestion.text}
+				        	</a>
+				        </td>
+				      </tr>
+			      </c:forEach>
+			      
+			    </tbody>
+			  </table>
+			</c:when>
+			<c:otherwise>
+				There are no multiple choice questions
+			</c:otherwise>
+		</c:choose>
 
         <hr>
 

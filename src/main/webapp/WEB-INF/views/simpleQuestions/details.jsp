@@ -1,6 +1,7 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ page session="false" %>
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Forms App - Home</title>
+    <title>Forms App - Login</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
@@ -68,57 +69,73 @@
 
     <!-- Page Content -->
     <div class="container">
-
-        <!-- Jumbotron Header -->
-        <header class="jumbotron hero-spacer">
-            <h1>A Warm Welcome!</h1>
-            <p>Welcome to Forms App, where you can interact with people through creating and answering questions!</p>
-        </header>
-
-        <hr>
-        
-        <sec:authorize access="hasRole('ROLE_ADMIN')">
-        	<h3>
-    			<a href="<c:url value="/forms/create"/>">Create form</a>
-			</h3>
-        </sec:authorize>
-
-        <!-- Title -->
-        <div class="row">
-            <div class="col-lg-12">
-                <h3>Latest Forms</h3>
-            </div>
-        </div>
-        <!-- /.row -->
+    	<h4>
+    			<a href="<c:url value="/forms/details?id=${simpleQuestion.form.id}"/>">Back to form</a>
+		</h4>
+    	<h3>${simpleQuestion.text}?</h3>
+    	
+    	<hr />
+    	
+    	<h2 class="text-center">Add Answer</h2>
+    	
+    	<form class="form-horizontal" role="form" name="simpleAnswer" method="POST" action="<c:url value="/simpleAnswers/create"/>" >
+		  <div class="form-group">
+		    <label class="control-label col-sm-2" for="text">Answer:</label>
+		    <div class="col-sm-10">
+		      <textarea class="form-control" name="text" id="text"></textarea>
+		    </div>
+		    <input type="hidden" name="simpleQuestion.id" value="${simpleQuestion.id}"/>
+		  </div>
+		  <div class="form-group"> 
+		    <div class="col-sm-offset-2 col-sm-10">
+		      <button type="submit" class="btn btn-default">Add Answer</button>
+		    </div>
+		  </div>
+		</form>
+    	
+    	<hr />
+    	
+    	<h2 class="text-center">Answers</h2>
+		
 		<c:choose>
-			<c:when test="${not empty forms }">
-			
-		        <!-- Page Features -->
-		        <div class="row text-center">
-		        
-		        	<c:forEach var="form" items="${forms}">
-		        	
-		        	<a href="<c:url value="forms/details?id=${form.id}" />">
-			            <div class="col-md-3 col-sm-6 hero-feature">
-			                <div class="thumbnail">
-			                    <img src="<c:url value="/resources/img/form-icon.png" />" alt="">
-			                    <div class="caption">
-			                        <h3>${form.title}</h3>
-			                    </div>
-			                </div>
-			            </div>
-		            </a>
-		            
-		            </c:forEach>
-		            
-		        </div>
-		        <!-- /.row -->
-		        
-	        </c:when>
-	        <c:otherwise>
-	        	There are no forms
-	        </c:otherwise>
-        </c:choose>
+			<c:when test="${not empty simpleQuestion.simpleAnswers}">
+				<table class="table table-striped">
+			    <thead>
+			    	<tr style="font-size: 18px">
+			    		<th>
+			    			User
+			    		</th>
+			    		<th>
+			    			Answer
+			    		</th>
+			    		<th>
+			    			Manage
+			    		</th>
+			    	</tr>
+			    </thead>
+			    <tbody>
+			      
+			      <c:forEach var="simpleAnswer" items="${simpleQuestion.simpleAnswers}">
+			      	<tr>
+			      		<td style="padding: 10px">
+				        	${simpleAnswer.user.login}
+				        </td>
+				        <td style="padding: 10px">
+				        	${simpleAnswer.text}
+				        </td>
+				        <td style="padding: 10px">
+				        	<a href="<c:url value="/simpleAnswers/delete?answerId=${simpleAnswer.id}&questionId=${simpleQuestion.id}"/>" >Delete</a>
+				        </td>
+				    </tr>
+			      </c:forEach>
+			      
+			    </tbody>
+			  </table>
+			</c:when>
+			<c:otherwise>
+				There are no answers
+			</c:otherwise>
+		</c:choose>
 
         <hr>
 
