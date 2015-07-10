@@ -104,9 +104,11 @@
 			                    <img src="<c:url value="/resources/img/form-icon.png" />" alt="">
 			                    <div class="caption">
 			                        <h3>${form.title}</h3>
-			                        <p>
-			                            <a href="<c:url value="forms/update?id=${form.id}"/>" class="btn btn-primary">Edit</a> <a href="<c:url value="forms/delete?id=${form.id}"/>" class="btn btn-default">Delete</a>
-			                        </p>
+			                        <sec:authorize access="hasRole('ROLE_ADMIN')">
+			                        	<p>
+				                            <a href="<c:url value="forms/update?id=${form.id}"/>" class="btn btn-primary">Edit</a> <a href="<c:url value="forms/delete?id=${form.id}"/>" class="btn btn-default">Delete</a>
+				                        </p>
+			                        </sec:authorize>
 			                    </div>
 			                </div>
 			            </div>
