@@ -78,9 +78,14 @@
         <hr>
         
         <sec:authorize access="hasRole('ROLE_ADMIN')">
+        <!--
         	<h3>
     			<a href="<c:url value="/forms/create"/>">Create form</a>
 			</h3>
+			-->
+			<p>
+				<a href="<c:url value="/forms/create"/>" class="btn btn-default btn-lg">Create form</a>
+			</p>
         </sec:authorize>
 
         <!-- Title -->

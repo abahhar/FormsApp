@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -71,13 +72,20 @@
     <div class="container">
     	<h2 class="text-center">${form.title}</h2>
 		
+		<p>
+			<a href="<c:url value="/simpleQuestions/create?formId=${form.id}"/>" class="btn btn-default btn-lg">Create simple question</a>
+			<a href="<c:url value="/mcQuestions/create?formId=${form.id}"/>" class="btn btn-default btn-lg">Create multiple choice question</a>
+		</p>
+		
 		<c:choose>
 			<c:when test="${not empty simpleQuestions}">
-				<div class="well">
-					<table class="table table-striped" style="font-size: 18px">
+					<table class="table table-striped table-bordered" style="font-size: 18px">
 				    <thead>
 				      <tr>
 				        <th>Simple questions</th>
+				        <sec:authorize access="hasRole('ROLE_ADMIN')">
+				        	<th colspan="2" class="text-center">Manage</th>
+				      	</sec:authorize>
 				      </tr>
 				    </thead>
 				    <tbody>
@@ -89,12 +97,23 @@
 					        		${simpleQuestion.text}
 					        	</a>
 					        </td>
+					        <sec:authorize access="hasRole('ROLE_ADMIN')">
+				        		<td class="text-center">
+				        			<a href="<c:url value="../simpleQuestions/update?id=${simpleQuestion.id}" />" >
+					        			Edit
+					        		</a>
+				        		</td>
+				        		<td class="text-center">
+				        			<a href="<c:url value="../simpleQuestions/delete?id=${simpleQuestion.id}" />" >
+					        			Delete
+					        		</a>
+				        		</td>
+				      		</sec:authorize>
 					      </tr>
 				      </c:forEach>
 				      
 				    </tbody>
 				  </table>
-			  </div>
 			</c:when>
 			<c:otherwise>
 				<div class="well">
@@ -105,11 +124,13 @@
 		
 		<c:choose>
 			<c:when test="${not empty mcQuestions}">
-				<div class="well">
-					<table class="table table-striped" style="font-size: 18px">
+					<table class="table table-striped table-bordered" style="font-size: 18px">
 				    <thead>
 				      <tr>
 				        <th>Multiple choice questions</th>
+				        <sec:authorize access="hasRole('ROLE_ADMIN')">
+				        	<th colspan="2" class="text-center">Manage</th>
+				      	</sec:authorize>
 				      </tr>
 				    </thead>
 				    <tbody>
@@ -117,16 +138,27 @@
 				      <c:forEach var="mcQuestion" items="${mcQuestions}">
 				      	<tr>
 					        <td style="padding: 10px">
-					        	<a href="<c:url value="mcQuestions/details?id=${mcQuestion.id}" />" >
+					        	<a href="<c:url value="../mcQuestions/details?id=${mcQuestion.id}" />" >
 					        		${mcQuestion.text}
 					        	</a>
 					        </td>
+					        <sec:authorize access="hasRole('ROLE_ADMIN')">
+				        		<td class="text-center">
+				        			<a href="<c:url value="../mcQuestions/update?id=${mcQuestion.id}" />" >
+					        			Edit
+					        		</a>
+				        		</td>
+				        		<td class="text-center">
+				        			<a href="<c:url value="../mcQuestions/delete?id=${mcQuestion.id}" />" >
+					        			Delete
+					        		</a>
+				        		</td>
+				      		</sec:authorize>
 					      </tr>
 				      </c:forEach>
 				      
 				    </tbody>
 				  </table>
-				</div>
 			</c:when>
 			<c:otherwise>
 				<div class="well">

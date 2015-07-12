@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Forms App - ${simpleQuestion.text}?</title>
+    <title>Forms App - Edit multiple choice question</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
@@ -69,73 +69,49 @@
 
     <!-- Page Content -->
     <div class="container">
-    	<h4>
-    			<a href="<c:url value="/forms/details?id=${simpleQuestion.form.id}"/>">Back to form</a>
-		</h4>
-    	<h3>${simpleQuestion.text}</h3>
-    	
-    	<hr />
-    	
-    	<h2 class="text-center">Add Answer</h2>
-    	
-    	<form class="form-horizontal" role="form" name="simpleAnswer" method="POST" action="<c:url value="/simpleAnswers/create"/>" >
+    	<h2 class="text-center">Edit multiple choice question: ${mcQuestionWrapper.mcQuestion.text}</h2>
+    	<p>
+		
+        <form class="form-horizontal" role="mcQuestionWrapper" name="mcQuestionWrapper" method="POST" action="<c:url value="/mcQuestions/update"/>" >
 		  <div class="form-group">
-		    <label class="control-label col-sm-2" for="text">Answer:</label>
+		    <label class="control-label col-sm-2" for="text">Question:</label>
 		    <div class="col-sm-10">
-		      <textarea class="form-control" name="text" id="text"></textarea>
+		      <input type="text" class="form-control" name="mcQuestion.text" id="text" placeholder="Enter question" value="${mcQuestionWrapper.mcQuestion.text}" autofocus>
+		      <input type="hidden" name="mcQuestion.id" value="${mcQuestionWrapper.mcQuestion.id}" />
+		      <input type="hidden" name="mcQuestion.form.id" value="${mcQuestionWrapper.mcQuestion.form.id}" />
+		      <br/>
 		    </div>
-		    <input type="hidden" name="simpleQuestion.id" value="${simpleQuestion.id}"/>
+		    
+		    
+		    <label class="control-label col-sm-2" for="choices">Choices:</label>
+		    <div class="col-sm-10">
+
+			      <c:forEach items="${mcQuestionWrapper.choices}" varStatus="i" var="choice">
+			      		<input type="text" class="form-control" name="choices" id="text" placeholder="Enter choice" value="${choice.text}"/>
+				  		<br/>
+				  </c:forEach>
+
+			<!--
+				<input type="text" class="form-control" name="choices" id="text" placeholder="Enter choice"/>
+				<br/>
+				<input type="text" class="form-control" name="choices" id="text" placeholder="Enter choice"/>
+				<br/>
+				<input type="text" class="form-control" name="choices" id="text" placeholder="Enter choice"/>
+				<br/>
+				<input type="text" class="form-control" name="choices" id="text" placeholder="Enter choice"/>
+		    -->
+		    </div>
 		  </div>
 		  <div class="form-group"> 
 		    <div class="col-sm-offset-2 col-sm-10">
-		      <button type="submit" class="btn btn-default">Add Answer</button>
+		      <button type="submit" class="btn btn-default">Update</button>
 		    </div>
 		  </div>
 		</form>
-    	
-    	<hr />
-    	
-    	<h2 class="text-center">Answers</h2>
 		
-		<c:choose>
-			<c:when test="${not empty simpleQuestion.simpleAnswers}">
-				<table class="table table-striped">
-			    <thead>
-			    	<tr style="font-size: 18px">
-			    		<th>
-			    			User
-			    		</th>
-			    		<th>
-			    			Answer
-			    		</th>
-			    		<th>
-			    			Manage
-			    		</th>
-			    	</tr>
-			    </thead>
-			    <tbody>
-			      
-			      <c:forEach var="simpleAnswer" items="${simpleQuestion.simpleAnswers}">
-			      	<tr>
-			      		<td style="padding: 10px">
-				        	${simpleAnswer.user.login}
-				        </td>
-				        <td style="padding: 10px">
-				        	${simpleAnswer.text}
-				        </td>
-				        <td style="padding: 10px">
-				        	<a href="<c:url value="/simpleAnswers/delete?answerId=${simpleAnswer.id}&questionId=${simpleQuestion.id}"/>" >Delete</a>
-				        </td>
-				    </tr>
-			      </c:forEach>
-			      
-			    </tbody>
-			  </table>
-			</c:when>
-			<c:otherwise>
-				There are no answers
-			</c:otherwise>
-		</c:choose>
+		<h4>
+    			<a href="<c:url value="/forms"/>">Back</a>
+		</h4>
 
         <hr>
 

@@ -34,7 +34,6 @@ public class SimpleQuestionTest {
 		Form form = formService.findAll().iterator().next();
 		
 		savedQuestion.setText(text);
-		savedQuestion.setNumberOfAnswers(numberOfAnswers);
 		savedQuestion.setForm(form);
 		simpleQuestionService.save(savedQuestion);
 		
@@ -43,7 +42,6 @@ public class SimpleQuestionTest {
 		
 		Assert.assertNotNull(simpleQuestion);
 		Assert.assertEquals(text, simpleQuestion.getText());
-		Assert.assertEquals(numberOfAnswers, simpleQuestion.getNumberOfAnswers());
 		Assert.assertEquals(form.getId(), simpleQuestion.getForm().getId());
 	}
 	
@@ -56,7 +54,6 @@ public class SimpleQuestionTest {
 		Integer numberOfAnswers = 4;
 		
 		questionToUpdate.setText(text);
-		questionToUpdate.setNumberOfAnswers(numberOfAnswers);
 		simpleQuestionService.save(questionToUpdate);
 		
 		int id = questionToUpdate.getId();
@@ -64,7 +61,6 @@ public class SimpleQuestionTest {
 		
 		Assert.assertNotNull(simpleQuestion);
 		Assert.assertEquals(text, simpleQuestion.getText());
-		Assert.assertEquals(numberOfAnswers, simpleQuestion.getNumberOfAnswers());
 	}
 	
 	@Ignore
