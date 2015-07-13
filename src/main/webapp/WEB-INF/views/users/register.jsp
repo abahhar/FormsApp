@@ -2,9 +2,6 @@
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Forms App - Login</title>
+    <title>Forms App - Register</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
@@ -72,36 +69,30 @@
 
     <!-- Page Content -->
     <div class="container">
-    	<h2 class="text-center">Login</h2>
+    	<h2 class="text-center">Registration form</h2>
     	
 		<c:if test="${error == true}">
 			<p>
-				<b class="text-danger">Invalid login or password.</b>
+				<b class="text-danger">Username already exists.</b>
 			</p>
 		</c:if>
 		
-		<c:if test="${registered == true}">
-			<p>
-				<b class="text-success">Successfully registered, please enter credentials to login.</b>
-			</p>
-		</c:if>
-		
-        <form class="form-horizontal" role="form" method="POST" action="<c:url value="/j_spring_security_check"/>" >
+        <form class="form-horizontal" role="form" name="user" method="POST" action="<c:url value="/users/register"/>" >
 		  <div class="form-group">
-		    <label class="control-label col-sm-2" for="j_username">Username:</label>
+		    <label class="control-label col-sm-2" for="login">Username:</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control" name="j_username" id="j_username" placeholder="Enter username" autofocus>
+		      <input type="text" class="form-control" name="login" id="login" placeholder="Enter username" autofocus>
 		    </div>
 		  </div>
 		  <div class="form-group">
-		    <label class="control-label col-sm-2" for="j_password">Password:</label>
+		    <label class="control-label col-sm-2" for="password">Password:</label>
 		    <div class="col-sm-10"> 
-		      <input type="password" class="form-control" name="j_password" id="j_password" placeholder="Enter password">
+		      <input type="password" class="form-control" name="password" id="password" placeholder="Enter password">
 		    </div>
 		  </div>
 		  <div class="form-group"> 
 		    <div class="col-sm-offset-2 col-sm-10">
-		      <button type="submit" class="btn btn-default">Login</button>
+		      <button type="submit" class="btn btn-default">Register</button>
 		    </div>
 		  </div>
 		</form>
