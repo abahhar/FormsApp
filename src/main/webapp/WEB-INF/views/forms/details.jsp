@@ -71,11 +71,17 @@
     <!-- Page Content -->
     <div class="container">
     	<h2 class="text-center">${form.title}</h2>
+    	
+    	<h4>
+    			<a href="<c:url value="/forms"/>">Back to forms</a>
+		</h4>
 		
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
 		<p>
 			<a href="<c:url value="/simpleQuestions/create?formId=${form.id}"/>" class="btn btn-default btn-lg">Create simple question</a>
 			<a href="<c:url value="/mcQuestions/create?formId=${form.id}"/>" class="btn btn-default btn-lg">Create multiple choice question</a>
 		</p>
+		</sec:authorize>
 		
 		<c:choose>
 			<c:when test="${not empty simpleQuestions}">

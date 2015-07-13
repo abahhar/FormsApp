@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -111,9 +112,11 @@
 			    		<th>
 			    			Answer
 			    		</th>
+			    		<sec:authorize access="hasRole('ROLE_ADMIN')">
 			    		<th>
 			    			Manage
 			    		</th>
+			    		</sec:authorize>
 			    	</tr>
 			    </thead>
 			    <tbody>
@@ -126,9 +129,11 @@
 				        <td style="padding: 10px">
 				        	${choiceAnswer.choice.text}
 				        </td>
+				        <sec:authorize access="hasRole('ROLE_ADMIN')">
 				        <td style="padding: 10px">
 				        	<a href="<c:url value="/choiceAnswers/delete?answerId=${choiceAnswer.id}&questionId=${mcQuestion.id}"/>" >Delete</a>
 				        </td>
+				        </sec:authorize>
 				    </tr>
 			      </c:forEach>
 			      

@@ -24,7 +24,11 @@
   
   <security:http auto-config='true' use-expressions="true"> <!-- use-expressions enables using expressions like isAuthorized(), isAnonymous() & isRole() -->
   	<security:intercept-url pattern="/user-login" access="isAnonymous()"/> <!-- To avoid redirect loop since login-page changed -->
-    <security:intercept-url pattern="/forms/**" access="hasRole('ROLE_USER')"/>  
+    <security:intercept-url pattern="/forms/**" access="hasRole('ROLE_USER')"/>
+    <security:intercept-url pattern="/simpleQuestions/**" access="hasRole('ROLE_USER')"/>
+    <security:intercept-url pattern="/mcQuestions/**" access="hasRole('ROLE_USER')"/>
+    <security:intercept-url pattern="/simpleAnswers/**" access="hasRole('ROLE_USER')"/>
+    <security:intercept-url pattern="/choiceAnswers/**" access="hasRole('ROLE_USER')"/>
     <security:form-login login-page="/user-login"
     default-target-url="/forms"
     always-use-default-target="true"
